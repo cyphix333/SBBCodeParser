@@ -4,9 +4,9 @@
     "keywords": [
         "SBBCodeParser"
     ],
-		"homepage": "https://github.com/samclarke/SBBCodeParser",
-		"canonical": "https://github.com/cyphix333/SBBCodeParser",
-		"source": "https://github.com/cyphix333/SBBCodeParser/tree/master"
+	"homepage": "https://github.com/samclarke/SBBCodeParser",
+	"canonical": "https://github.com/cyphix333/SBBCodeParser",
+	"source": "https://github.com/cyphix333/SBBCodeParser/tree/master",
     "autoload": {
         "classmap": ["SBBCodeParser.php","classes/"]
     },
