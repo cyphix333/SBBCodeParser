@@ -694,7 +694,7 @@ class Node_Container_Document extends Node_Container
 	 */
 	public function parse($str)
 	{
-		$str      = preg_replace('/[\r\n|\r]/', "\n", $str);
+		$str 	  = preg_replace('/\r\n|\r/', "\n", $str);
 		$len      = strlen($str);
 		$tag_open = false;
 		$tag_text = '';
@@ -720,7 +720,7 @@ class Node_Container_Document extends Node_Container
 					$bits        = preg_split('/([ =])/', trim($tag), 2, PREG_SPLIT_DELIM_CAPTURE);
 					$tag_attrs   = (isset($bits[2]) ? $bits[1] . $bits[2] : '');
 					$tag_closing = ($bits[0][0] === '/');
-					$tag_name    = ($bits[0][0] === '/' ? substr($bits[0], 1) : $bits[0]);
+					$tag_name    = strtolower(($bits[0][0] === '/' ? substr($bits[0], 1) : $bits[0]));
 
 					if(isset($this->bbcodes[$tag_name]))
 					{
@@ -754,6 +754,10 @@ class Node_Container_Document extends Node_Container
 		}
 
 		$this->tag_text($tag_text);
+		
+		if ($tag_open) {
+			$tag_text .= '[' . $tag;		
+		}
 
 		if($this->throw_errors && !$this->current_tag instanceof Node_Container_Document)
 			throw new Exception_MissingEndTag("Missing closing tag for tag [{$this->current_tag->tag()}]");
@@ -995,6 +999,9 @@ class Node_Container_Document extends Node_Container
 	 */
 	public function detect_emoticons()
 	{
+		
+		if (count($this->emoticons) > 0) {
+		
 		$pattern = '';
 		foreach($this->emoticons as $key => $url)
 			$pattern .= ($pattern === ''? '/(?:':'|') . preg_quote($key, '/');
@@ -1028,8 +1035,11 @@ class Node_Container_Document extends Node_Container
 			$replacment[] = new Node_Text(substr($child->get_text(), $last_pos));
 			$child->parent()->replace_child($child, $replacment);
 		}, $this->get_excluded_tags(BBCode::AUTO_DETECT_EXCLUDE_EMOTICON));
-
+	
+		}
+		
 		return $this;
+		
 	}
 
 	/**
