@@ -1,15 +1,9 @@
 {
     "name": "cyphix333/sbb-code-parser",
     "description": "SBBCodeParser is a simple BBCode parser",
-    "keywords": [
-        "SBBCodeParser"
-    ],
-	"homepage": "https://github.com/samclarke/SBBCodeParser",
-	"canonical": "https://github.com/cyphix333/SBBCodeParser",
-	"source": "https://github.com/cyphix333/SBBCodeParser/tree/master",
-    "autoload": {
-        "classmap": ["SBBCodeParser.php","classes/"]
-    },
+    "homepage": "https://github.com/samclarke/SBBCodeParser",
+    "keywords": ["SBBCodeParser"],
+    "type": "library",
     "authors": [
         {
             "name": "Sam Clarke"
@@ -17,5 +11,8 @@
     ],
     "require": {
         "php": ">=5.3"
+    },
+    "autoload": {
+        "classmap": ["SBBCodeParser.php", "classes/"]
     }
 }
